@@ -1,0 +1,43 @@
+%Script to plot media results
+close all hidden;
+
+OxygenfractionNodes=MC_Nodes(:, 1)./(MC_Nodes(:, 1)+MC_Nodes(:, 2)+MC_Nodes(:, 3));
+WaterfractionNodes=MC_Nodes(:, 2)./(MC_Nodes(:, 1)+MC_Nodes(:, 2)+MC_Nodes(:, 3));
+NitrogenfractionNodes=MC_Nodes(:, 3)./(MC_Nodes(:, 1)+MC_Nodes(:, 2)+MC_Nodes(:, 3));
+
+OxygenfractionElements=MC_Elements(:, 1)./(MC_Elements(:, 1)+MC_Elements(:, 2)+MC_Elements(:, 3));
+WaternfractionElements=MC_Elements(:, 2)./(MC_Elements(:, 1)+MC_Elements(:, 2)+MC_Elements(:, 3));
+NitrogenfractionElements=MC_Elements(:, 3)./(MC_Elements(:, 1)+MC_Elements(:, 2)+MC_Elements(:, 3));
+
+figure(1);
+set(gcf, 'PaperPositionMode', 'auto');
+set(gcf, 'Position', [100 100 500 400]);
+CS_Serie_A=hsv(3);
+CS_Serie_B=hsv(3)/2;
+hold on;
+plot(PositionNodes, OxygenfractionNodes, '-o','color',CS_Serie_A(1, :),'LineWidth',3 ,'MarkerSize',6, 'MarkerEdgeColor',CS_Serie_A(1, :),'MarkerFaceColor',CS_Serie_A(1, :));
+plot(PositionElements, OxygenfractionElements, '-o','color',CS_Serie_B(1, :),'LineWidth',2 ,'MarkerSize',4, 'MarkerEdgeColor',CS_Serie_B(1, :),'MarkerFaceColor',CS_Serie_B(1, :));
+plot(PositionNodes, WaterfractionNodes, '-o','color',CS_Serie_A(2, :),'LineWidth',3 ,'MarkerSize',6, 'MarkerEdgeColor',CS_Serie_A(2, :),'MarkerFaceColor',CS_Serie_A(2, :));
+plot(PositionElements, WaternfractionElements, '-o','color',CS_Serie_B(2, :),'LineWidth',2 ,'MarkerSize',4, 'MarkerEdgeColor',CS_Serie_B(2, :),'MarkerFaceColor',CS_Serie_B(2, :));
+plot(PositionNodes, NitrogenfractionNodes, '-o','color',CS_Serie_A(3, :),'LineWidth',3 ,'MarkerSize',6, 'MarkerEdgeColor',CS_Serie_A(3, :),'MarkerFaceColor',CS_Serie_A(3, :));
+plot(PositionElements, NitrogenfractionElements, '-o','color',CS_Serie_B(3, :),'LineWidth',2 ,'MarkerSize',4, 'MarkerEdgeColor',CS_Serie_B(3, :),'MarkerFaceColor',CS_Serie_B(3, :));
+LEGENDE=[];
+LEGENDE{1}=('oxygen fraction nodes');
+LEGENDE{2}=('oxygen fraction elements');
+LEGENDE{3}=('water fraction nodes');
+LEGENDE{4}=('water fraction elements');
+LEGENDE{5}=('nitrogen fraction nodes');
+LEGENDE{6}=('nitrogen fraction elements');
+cleg=legend(LEGENDE, 'location', 'east');
+ylim([0 0.8]);
+xlim([0 1]);
+xlabel('position along cathode channel');
+ylabel('fraction');
+grid on;
+grid minor;
+print(gcf, '-dpng','-r720',('./Plots/MediaAlongCathode'));
+
+
+
+
+figure(2);
