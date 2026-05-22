@@ -14,7 +14,7 @@ MC_Cell_In = MC_Stack_In/C.CP.nZ;
 
 
 %%% calculation electrochemical reaction along the channel
-I=ones(C.NumParam.NumSegments, 1).*C.OP.StackCurrent/C.NumParam.NumSegments; %calculation of the current "I" of each segment
+I=ones(C.NumParam.NumSegments, 1).*C.CP.I/C.NumParam.NumSegments; %calculation of the current "I" of each segment
 [MC_Nodes] = MediaDiscretisation (MC_Cell_In, C, I);
 [MC_Elements] = NodeToElement (MC_Nodes);
 
